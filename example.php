@@ -5,11 +5,11 @@
     <title>集合写真検索システム</title>
   </head>
   <body>
-	<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">  
-		<p>    
+	<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+		<p>
 		検索キーワード：<input type="text" name="keyword" size=20/><br>
 		写真中の人の数：<input type="text" name="number" size=20 /><br>
-		<input type="submit" value="Search!" />  
+		<input type="submit" value="Search!" />
 		</p>
 	</form>
 
@@ -23,7 +23,7 @@
 			$line = fgets($f1);
 			$tf_line = preg_split( "/\t/" , $line );
 			@$tf_line[2] = preg_replace("/\r|\n/","",$tf_line[2]);
-			@$tf_data[$tf_line[0]][$tf_line[2]] = $tf_line[1]; 
+			@$tf_data[$tf_line[0]][$tf_line[2]] = $tf_line[1];
 		}
 		fclose($f1);
 	// tfファイルの読み込み　ここまで
@@ -37,7 +37,7 @@
 			$line = fgets($f2);
 			$fc_line = preg_split( "/\t/" , $line );
 			@$fc_line[1] = preg_replace("/\r|\n/","",$fc_line[1]);
-			$fc_data[$fc_line[1]] = $fc_line[0]; 
+			$fc_data[$fc_line[1]] = $fc_line[0];
 		}
 		fclose($f2);
 	// fcファイルの読み込み　ここまで
@@ -45,8 +45,8 @@
 
 	// 以下、検索処理
 		$result_num = 0;
-
-		if (isset($_POST["keyword"]) && isset($_POST["number"])) {  
+    $_POST["number"] = mb_convert_kana($_POST["number"], "n", "utf-8");
+		if (isset($_POST["keyword"]) && isset($_POST["number"])) {
 			if(array_key_exists($_POST["keyword"], $tf_data)){
 
 				if ($_POST["number"]==null || !preg_match("/^[0-9]+$/", $_POST["number"])) {
