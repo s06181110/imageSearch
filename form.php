@@ -25,7 +25,7 @@ foreach($option_data as $option_data_key =>  $option_data_value){
             $('#second_input').hide();
             $(function () {
                 $('#term').change(function () {
-                    var val = $(this).val();
+                    const val = $(this).val();
                     if (val == "from_to")  $('#second_input').show();
                     else $('#second_input').hide();
                 })
