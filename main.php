@@ -5,14 +5,7 @@
     <title>集合写真検索システム</title>
 </head>
 <body>
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-    <p>
-        検索キーワード：<input type="text" name="keyword" size=20/><br>
-        写真中の人の数：<input type="text" name="number" size=20 /><br>
-        <input type="submit" value="Search!" />
-    </p>
-</form>
-<?php $_POST["number"] = mb_convert_kana($_POST["number"], "n", "utf-8");?>
+<?php require 'form.php'?>
 
 <?php
 require 'read.php';
