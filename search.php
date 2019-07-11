@@ -15,11 +15,11 @@ function search_result($tf_data, $fc_data){
               echo "キーワード「".$_POST['keyword']."」　人数「";
               echo $_POST['number']."人」以下の検索結果<br>\n";
             } elseif($_POST['term']=='from_to'){
-              if(!$_POST["number2"]==null || preg_match("/^[0-9]+$/", $_POST["number2"])){
+              if($_POST["number2"]==null || !preg_match("/^[0-9]+$/", $_POST["number2"])){
+                echo "人数の範囲を入力してください。<br>\n";
+              } else {
                 echo "キーワード「".$_POST['keyword']."」　人数「";
                 echo $_POST['number']."人から".$_POST['number2']."人」での検索結果<br>\n";
-              } else {
-              echo "人数の範囲を入力してください。<br>\n";
             }
           }
             echo "<hr><br>\n";
