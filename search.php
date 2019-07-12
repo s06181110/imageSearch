@@ -23,10 +23,10 @@ function search_result($tf_data, $fc_data){
                         break;
                 }
             }
-          }
-            echo "<hr><br>\n";
+        }
+        echo "<hr><br>\n";
 
-            if($_POST['term']=='only'){
+        if($_POST['term']=='only'){
             arsort($tf_data[@$_POST["keyword"]]);
             foreach($tf_data[@$_POST["keyword"]] as $key => $val ) {
                 if (@$_POST["number"] == @$fc_data[$key] && @$_POST["number"]<>null){
@@ -40,74 +40,74 @@ function search_result($tf_data, $fc_data){
                     $result_num++;
                 }
             }
-          }
-          if($_POST['term']=='more'){//以上
-            arsort($tf_data[@$_POST['keyword']]);
-            foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
-              for($i = $_POST['number'];$i <= 50;$i++){
-                if (@$i == @$fc_data[$key] && @$i<>null){
-                  echo "<div class=\"p_box\">\n";
-                  echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
-                  echo "<ul>\n";
-                  echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
-                  echo "<li class=\"title_area\">"."人数:".$fc_data[$key]."人</li>\n";
-                  echo "</ul>\n";
-                  echo "</div>\n";
-                  $result_num++;
-                }
-              }
-            }
-          }
-          if($_POST['term']=='less'){//以下
-            arsort($tf_data[@$_POST['keyword']]);
-            foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
-              for($i = $_POST['number'];$i > 0;$i--){
-                if (@$i == @$fc_data[$key] && @$i<>null){
-                  echo "<div class=\"p_box\">\n";
-                  echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
-                  echo "<ul>\n";
-                  echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
-                  echo "<li class=\"title_area\">"."人数:".$fc_data[$key]."人</li>\n";
-                  echo "</ul>\n";
-                  echo "</div>\n";
-                  $result_num++;
-                }
-              }
-            }
-          }
-          if(!$_POST["number"]==null || preg_match("/^[0-9]+$/", $_POST["number"])){
-            if(!$_POST["number2"]==null || preg_match("/^[0-9]+$/", $_POST["number2"])){
-              if($_POST['term']=='from_to'){//から・まで
-                $min = $_POST['number'];
-                $max = $_POST['number2'];
-                arsort($tf_data[@$_POST['keyword']]);
-                foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
-                  for($i = $min;$i <= $max;$i++){
-                    if (@$i == @$fc_data[$key] && @$i<>null){
-                      echo "<div class=\"p_box\">\n";
-                      echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
-                      echo "<ul>\n";
-                      echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
-                      echo "<li class=\"title_area\">"."人数:".$fc_data[$key]."人</li>\n";
-                      echo "</ul>\n";
-                      echo "</div>\n";
-                      $result_num++;
-                    }
-                  }
-                }
-              }
-            }
-          }
-
-        } elseif (@$_POST["keyword"]==null) {
-            echo "<div class=\"font_size\">\n";
-            echo '検索キーワードを入力して下さい。';
-            echo "</div>";
-        } else {
-            echo "<div class=\"font_size\">\n";
-            echo '検索キーワードに合致する写真はありません。';
-            echo "</div>";
         }
+        if($_POST['term']=='more'){//以上
+            arsort($tf_data[@$_POST['keyword']]);
+            foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
+                for($i = $_POST['number'];$i <= 50;$i++){
+                    if (@$i == @$fc_data[$key] && @$i<>null){
+                        echo "<div class=\"p_box\">\n";
+                        echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
+                        echo "<ul>\n";
+                        echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
+                        echo "<li class=\"title_area\">"."人数:".$fc_data[$key]."人</li>\n";
+                        echo "</ul>\n";
+                        echo "</div>\n";
+                        $result_num++;
+                    }
+                }
+            }
+        }
+        if($_POST['term']=='less'){//以下
+            arsort($tf_data[@$_POST['keyword']]);
+            foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
+                for($i = $_POST['number'];$i > 0;$i--){
+                    if (@$i == @$fc_data[$key] && @$i<>null){
+                        echo "<div class=\"p_box\">\n";
+                        echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
+                        echo "<ul>\n";
+                        echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
+                        echo "<li class=\"title_area\">"."人数:".$fc_data[$key]."人</li>\n";
+                        echo "</ul>\n";
+                        echo "</div>\n";
+                        $result_num++;
+                    }
+                }
+            }
+        }
+        if(!$_POST["number"]==null || preg_match("/^[0-9]+$/", $_POST["number"])){
+            if(!$_POST["number2"]==null || preg_match("/^[0-9]+$/", $_POST["number2"])){
+                if($_POST['term']=='from_to'){//から・まで
+                    $min = $_POST['number'];
+                    $max = $_POST['number2'];
+                    arsort($tf_data[@$_POST['keyword']]);
+                    foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
+                        for($i = $min;$i <= $max;$i++){
+                            if (@$i == @$fc_data[$key] && @$i<>null){
+                                echo "<div class=\"p_box\">\n";
+                                echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
+                                echo "<ul>\n";
+                                echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
+                                echo "<li class=\"title_area\">"."人数:".$fc_data[$key]."人</li>\n";
+                                echo "</ul>\n";
+                                echo "</div>\n";
+                                $result_num++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    } elseif (@$_POST["keyword"]==null) {
+        echo "<div class=\"font_size\">\n";
+        echo '検索キーワードを入力して下さい。';
+        echo "</div>";
+    } else {
+        echo "<div class=\"font_size\">\n";
+        echo '検索キーワードに合致する写真はありません。';
+        echo "</div>";
+    }
     return $result_num;
 }
 
