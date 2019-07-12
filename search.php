@@ -1,37 +1,23 @@
 <?php
+
 function search_result($tf_data, $fc_data){
     $result_num = 0;
     if (isset($_POST["keyword"]) && isset($_POST["number"])) {
         if(array_key_exists($_POST["keyword"], $tf_data)){
             if ($_POST["number"]==null || !preg_match("/^[0-9]+$/", $_POST["number"])) {
-                echo "<div class=\"font_size\">\n";
-                echo "人数を正しく入力して下さい。";
-                echo "</div>";
+                echo search_message('person_num_error');
             } elseif($_POST['term']=='only'){
-              echo "<div class=\"font_size\">\n";
-              echo "キーワード「".$_POST['keyword']."」　人数「";
-              echo $_POST['number']."人」での検索結果<br>\n";
-              echo "</div>";
+                echo search_message('only');
             } elseif($_POST['term']=='more'){
-              echo "<div class=\"font_size\">\n";
-              echo "キーワード「".$_POST['keyword']."」　人数「";
-              echo $_POST['number']."人」以上の検索結果<br>\n";
+                echo search_message('more');
               echo "</div>";
             } elseif($_POST['term']=='less'){
-              echo "<div class=\"font_size\">\n";
-              echo "キーワード「".$_POST['keyword']."」　人数「";
-              echo $_POST['number']."人」以下の検索結果<br>\n";
-              echo "</div>";
+                echo search_message('less');
             } elseif($_POST['term']=='from_to'){
               if($_POST["number2"]==null || !preg_match("/^[0-9]+$/", $_POST["number2"])){
-                echo "<div class=\"font_size\">\n";
-                echo "人数の範囲を入力してください。<br>\n";
-                echo "</div>";
+                  echo search_message('person_num_error');
               } else {
-                echo "<div class=\"font_size\">\n";
-                echo "キーワード「".$_POST['keyword']."」　人数「";
-                echo $_POST['number']."人から".$_POST['number2']."人」での検索結果<br>\n";
-                echo "</div>";
+                  echo search_message('from_to');
               }
             }
           }
@@ -120,4 +106,19 @@ function search_result($tf_data, $fc_data){
             echo "</div>";
         }
     return $result_num;
+}
+
+function search_message($key){
+    // $messageを見やすくするための変数
+    $keyword_template = "キーワード「".$_POST['keyword']."」　人数「".$_POST['number']."人」";
+    //　キーによって返すメッセージを変更する
+    $message = [
+        'person_num_error'=>'<div class="font_size">人数を正しく入力して下さい。</div>',
+        'only'=>'<div class="font_size">'.$keyword_template.'での検索結果<br></div>',
+        'more'=>'<div class="font_size">'.$keyword_template.'以上の検索結果<br></div>',
+        'less'=>'<div class="font_size">'.$keyword_template.'以下の検索結果<br></div>',
+        'from_to'=>'<div class="font_size">'.$keyword_template.'から「'.$_POST['number2'].'人」の検索結果<br></div>',
+    ];
+
+    return $message[$key];
 }
