@@ -30,13 +30,7 @@ function search_result($tf_data, $fc_data){
             arsort($tf_data[@$_POST["keyword"]]);
             foreach($tf_data[@$_POST["keyword"]] as $key => $val ) {
                 if (@$_POST["number"] == @$fc_data[$key] && @$_POST["number"]<>null){
-                    echo "<div class=\"p_box\">\n";
-                    echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
-                    echo "<ul>\n";
-                    echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
-                    echo "<li class=\"title_area\">"."人数:".$fc_data[$key]."人</li>\n";
-                    echo "</ul>\n";
-                    echo "</div>\n";
+                    print_photo($key, $val, $fc_data[$key]);
                     $result_num++;
                 }
             }
@@ -46,13 +40,7 @@ function search_result($tf_data, $fc_data){
             foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
                 for($i = $_POST['number'];$i <= 50;$i++){
                     if (@$i == @$fc_data[$key] && @$i<>null){
-                        echo "<div class=\"p_box\">\n";
-                        echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
-                        echo "<ul>\n";
-                        echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
-                        echo "<li class=\"title_area\">"."人数:".$fc_data[$key]."人</li>\n";
-                        echo "</ul>\n";
-                        echo "</div>\n";
+                        print_photo($key, $val, $fc_data[$key]);
                         $result_num++;
                     }
                 }
@@ -63,13 +51,7 @@ function search_result($tf_data, $fc_data){
             foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
                 for($i = $_POST['number'];$i > 0;$i--){
                     if (@$i == @$fc_data[$key] && @$i<>null){
-                        echo "<div class=\"p_box\">\n";
-                        echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
-                        echo "<ul>\n";
-                        echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
-                        echo "<li class=\"title_area\">"."人数:".$fc_data[$key]."人</li>\n";
-                        echo "</ul>\n";
-                        echo "</div>\n";
+                        print_photo($key, $val, $fc_data[$key]);
                         $result_num++;
                     }
                 }
@@ -84,13 +66,7 @@ function search_result($tf_data, $fc_data){
                     foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
                         for($i = $min;$i <= $max;$i++){
                             if (@$i == @$fc_data[$key] && @$i<>null){
-                                echo "<div class=\"p_box\">\n";
-                                echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
-                                echo "<ul>\n";
-                                echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
-                                echo "<li class=\"title_area\">"."人数:".$fc_data[$key]."人</li>\n";
-                                echo "</ul>\n";
-                                echo "</div>\n";
+                                print_photo($key, $val, $fc_data[$key]);
                                 $result_num++;
                             }
                         }
@@ -132,4 +108,14 @@ function search_message($key){
     ];
 
     return $message[$key];
+}
+
+function print_photo($key, $val, $data){
+    echo "<div class=\"p_box\">\n";
+    echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
+    echo "<ul>\n";
+    echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
+    echo "<li class=\"title_area\">"."人数:".$data."人</li>\n";
+    echo "</ul>\n";
+    echo "</div>\n";
 }
