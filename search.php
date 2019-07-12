@@ -23,15 +23,16 @@ function search_result($tf_data, $fc_data){
               echo $_POST['number']."人」以下の検索結果<br>\n";
               echo "</div>";
             } elseif($_POST['term']=='from_to'){
-              if(!$_POST["number2"]==null || preg_match("/^[0-9]+$/", $_POST["number2"])){
+              if($_POST["number2"]==null || !preg_match("/^[0-9]+$/", $_POST["number2"])){
+                echo "<div class=\"font_size\">\n";
+                echo "人数の範囲を入力してください。<br>\n";
+                echo "</div>";
+              } else {
                 echo "<div class=\"font_size\">\n";
                 echo "キーワード「".$_POST['keyword']."」　人数「";
                 echo $_POST['number']."人から".$_POST['number2']."人」での検索結果<br>\n";
                 echo "</div>";
-              } else {
-                echo "<div class=\"font_size\">\n";
-                echo "人数の範囲を入力してください。<br>\n";
-                echo "</div>";
+              }
             }
           }
             echo "<hr><br>\n";
@@ -118,6 +119,5 @@ function search_result($tf_data, $fc_data){
             echo '検索キーワードに合致する写真はありません。';
             echo "</div>";
         }
-    }
     return $result_num;
 }
