@@ -4,21 +4,24 @@ function search_result($tf_data, $fc_data){
     $result_num = 0;
     if (isset($_POST["keyword"]) && isset($_POST["number"])) {
         if(array_key_exists($_POST["keyword"], $tf_data)){
-            if ($_POST["number"]==null || !preg_match("/^[0-9]+$/", $_POST["number"])) {
+            if (is_invalid_number($_POST['number'])) {
                 echo search_message('person_num_error');
-            } elseif($_POST['term']=='only'){
-                echo search_message('only');
-            } elseif($_POST['term']=='more'){
-                echo search_message('more');
-              echo "</div>";
-            } elseif($_POST['term']=='less'){
-                echo search_message('less');
-            } elseif($_POST['term']=='from_to'){
-              if($_POST["number2"]==null || !preg_match("/^[0-9]+$/", $_POST["number2"])){
-                  echo search_message('person_num_error');
-              } else {
-                  echo search_message('from_to');
-              }
+            } else {
+                switch ($_POST['term']){
+                    case 'only':
+                        echo search_message('only');
+                        break;
+                    case 'more':
+                        echo search_message('more');
+                        break;
+                    case 'less':
+                        echo search_message('more');
+                        break;
+                    case 'from_to':
+                        if (is_invalid_number($_POST["number2"])) echo search_message('person_num_error');
+                        else echo search_message('from_to');
+                        break;
+                }
             }
           }
             echo "<hr><br>\n";
@@ -106,6 +109,14 @@ function search_result($tf_data, $fc_data){
             echo "</div>";
         }
     return $result_num;
+}
+
+// numberは不正である
+function is_invalid_number($number){
+    $invalid = false;
+    // 何もない または 数値でないのは正しくない -> invalid : true
+    if ($number==null || !preg_match("/^[0-9]+$/", $number)) $invalid = true;
+    return $invalid;
 }
 
 function search_message($key){
