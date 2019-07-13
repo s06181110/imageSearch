@@ -1,11 +1,14 @@
 <?php
 
 function search_result($tf_data, $fc_data){
-    $result_num = 0;
     if(!isset($_POST["keyword"]) || @$_POST["keyword"] === ""){ message_print('keyword_error'); return 0; }
     if(!isset($_POST["number"])  || @$_POST["number"] === "") { message_print('number_error'); return 0;}
+    $result_num = 0;
+    $keyword = $_POST["keyword"];
+    $number = $_POST["number"];
+    $number2 = isset($_POST["number2"]) ? $_POST["number2"] : null;
 
-    if(array_key_exists($_POST["keyword"], $tf_data)){
+    if(array_key_exists($keyword, $tf_data)){
         if (is_invalid_number($_POST['number'])) {
             message_print('number_error');
         } else {
@@ -20,7 +23,7 @@ function search_result($tf_data, $fc_data){
                     message_print('more');
                     break;
                 case 'from_to':
-                    if (is_invalid_number($_POST["number2"])) message_print('number_error');
+                    if (is_invalid_number($number2)) message_print('number_error');
                     else message_print('from_to');
                     break;
             }
@@ -31,9 +34,9 @@ function search_result($tf_data, $fc_data){
     }
 
     if($_POST['term']=='only'){
-        arsort($tf_data[@$_POST["keyword"]]);
-        foreach($tf_data[@$_POST["keyword"]] as $key => $val ) {
-            if (@$_POST["number"] == @$fc_data[$key] && @$_POST["number"]<>null){
+        arsort($tf_data[@$keyword]);
+        foreach($tf_data[@$keyword] as $key => $val ) {
+            if (@$number == @$fc_data[$key] && @$number<>null){
                 print_photo($key, $val, $fc_data[$key]);
                 $result_num++;
             }
@@ -61,19 +64,13 @@ function search_result($tf_data, $fc_data){
             }
         }
     }
-    if(!$_POST["number"]==null || preg_match("/^[0-9]+$/", $_POST["number"])){
-        if(!$_POST["number2"]==null || preg_match("/^[0-9]+$/", $_POST["number2"])){
-            if($_POST['term']=='from_to'){//から・まで
-                $min = $_POST['number'];
-                $max = $_POST['number2'];
-                arsort($tf_data[@$_POST['keyword']]);
-                foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
-                    for($i = $min;$i <= $max;$i++){
-                        if (@$i == @$fc_data[$key] && @$i<>null){
-                            print_photo($key, $val, $fc_data[$key]);
-                            $result_num++;
-                        }
-                    }
+    if($_POST['term']=='from_to'){//から・まで
+        arsort($tf_data[@$_POST['keyword']]);
+        foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
+            for($i = $number;$i <= $number2;$i++){
+                if (@$i == @$fc_data[$key] && @$i<>null){
+                    print_photo($key, $val, $fc_data[$key]);
+                    $result_num++;
                 }
             }
         }

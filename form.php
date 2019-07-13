@@ -20,14 +20,16 @@ foreach($option_data as $option_data_key =>  $option_data_value){
         <select name="term" id="term">
             <?php echo $option_data; ?>
         </select>
-        <input type="text" name="number2" size="5" id="second_input">
+
         <script>
-            $('#second_input').hide();
             $(function () {
                 $('#term').change(function () {
                     const val = $(this).val();
-                    if (val === "from_to")  $('#second_input').show();
-                    else $('#second_input').hide();
+                    if (val === "from_to") {
+                        $('#term').after('<input type="text" name="number2" size="5" id="second_input" />');
+                    } else {
+                        $('#second_input').remove();
+                    }
                 })
             })
         </script>
