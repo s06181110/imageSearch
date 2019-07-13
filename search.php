@@ -3,10 +3,10 @@
 function search_result($tf_data, $fc_data){
     if(!isset($_POST["keyword"]) || @$_POST["keyword"] === ""){ message_print('keyword_error'); return 0; }
     if(!isset($_POST["number"])  || @$_POST["number"] === "") { message_print('number_error'); return 0;}
-    $result_num = 0;
     $keyword = $_POST["keyword"];
     $number = $_POST["number"];
     $number2 = isset($_POST["number2"]) ? $_POST["number2"] : null;
+    $match_type = $_POST["match_type"];
 
     if(array_key_exists($keyword, $tf_data)){
         if (is_invalid_number($_POST['number'])) {
@@ -33,49 +33,18 @@ function search_result($tf_data, $fc_data){
         return 0;
     }
     arsort($tf_data[@$keyword]);
-    $tf_keys = array_keys($tf_data);
-    $pattern = "/".$keyword."/";
-    $target_keys = preg_grep($pattern, $tf_keys);
-    if($_POST['term']=='only'){
+    $result_num = 0;
+    if($match_type == "complete"){      //完全一致
+        $result_num = image_output($tf_data, $fc_data, $keyword, $number, $number2);
+    }else if($match_type == "partial"){ //部分一致
+        $tf_keys = array_keys($tf_data);
+        $pattern = "/".$keyword."/";
+        $target_keys = preg_grep($pattern, $tf_keys);
         foreach ($target_keys as $target_key){
-            foreach ($tf_data[$target_key] as $key => $val) {
-                if (@$number == @$fc_data[$key] && @$number <> null) {
-                    print_photo($key, $val, $fc_data[$key]);
-                    $result_num++;
-                }
-            }
+            $result_num = image_output($tf_data, $fc_data, $target_key, $number, $number2);
         }
     }
-    if($_POST['term']=='more'){//以上
-        foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
-            for($i = $_POST['number'];$i <= 50;$i++){
-                if (@$i == @$fc_data[$key] && @$i<>null){
-                    print_photo($key, $val, $fc_data[$key]);
-                    $result_num++;
-                }
-            }
-        }
-    }
-    if($_POST['term']=='less'){//以下
-        foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
-            for($i = $_POST['number'];$i > 0;$i--){
-                if (@$i == @$fc_data[$key] && @$i<>null){
-                    print_photo($key, $val, $fc_data[$key]);
-                    $result_num++;
-                }
-            }
-        }
-    }
-    if($_POST['term']=='from_to'){//から・まで
-        foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
-            for($i = $number;$i <= $number2;$i++){
-                if (@$i == @$fc_data[$key] && @$i<>null){
-                    print_photo($key, $val, $fc_data[$key]);
-                    $result_num++;
-                }
-            }
-        }
-    }
+
     return $result_num;
 }
 
@@ -103,6 +72,49 @@ function message_print($key){
 
     echo $message[$key];
     echo "<hr><br>\n";
+}
+
+function image_output($tf_data, $fc_data,  $keyword, $number, $number2){
+    $result_num = 0;
+    if($_POST['term']=='only'){
+        foreach($tf_data[$keyword] as $key => $val ) {
+            if ($number == @$fc_data[$key]){
+                print_photo($key, $val, $fc_data[$key]);
+                $result_num++;
+            }
+        }
+    }
+    if($_POST['term']=='more'){//以上
+        foreach($tf_data[$keyword] as $key => $val ) {
+            for($i = $number; $i <= 50; $i++){
+                if (@$i == @$fc_data[$key] && @$i<>null){
+                    print_photo($key, $val, $fc_data[$key]);
+                    $result_num++;
+                }
+            }
+        }
+    }
+    if($_POST['term']=='less'){//以下
+        foreach($tf_data[$keyword] as $key => $val ) {
+            for($i = $number; $i > 0; $i--){
+                if (@$i == @$fc_data[$key] && @$i<>null){
+                    print_photo($key, $val, $fc_data[$key]);
+                    $result_num++;
+                }
+            }
+        }
+    }
+    if($_POST['term']=='from_to'){//から・まで
+        foreach($tf_data[$keyword] as $key => $val ) {
+            for($i = $number; $i <= $number2; $i++){
+                if (@$i == @$fc_data[$key] && @$i<>null){
+                    print_photo($key, $val, $fc_data[$key]);
+                    $result_num++;
+                }
+            }
+        }
+    }
+    return $result_num;
 }
 
 function print_photo($key, $val, $data){
