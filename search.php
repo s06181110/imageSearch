@@ -5,7 +5,7 @@ function search_result($tf_data, $fc_data){
     if(!isset($_POST["number"])  || @$_POST["number"] === "") { message_print('number_error'); return 0;}
     $keyword = $_POST["keyword"];
     $number = $_POST["number"];
-    $number2 = isset($_POST["number2"]) ? $_POST["number2"] : null;
+    $number2 = isset($_POST["number2"]) ? $_POST["number2"] : "";
     $match_type = $_POST["match_type"];
 
     if(array_key_exists($keyword, $tf_data)){
@@ -87,7 +87,7 @@ function image_output($tf_data, $fc_data,  $keyword, $number, $number2){
     if($_POST['term']=='more'){//以上
         foreach($tf_data[$keyword] as $key => $val ) {
             for($i = $number; $i <= 50; $i++){
-                if (@$i == @$fc_data[$key] && @$i<>null){
+                if (@$i == @$fc_data[$key]){
                     print_photo($key, $val, $fc_data[$key]);
                     $result_num++;
                 }
@@ -97,7 +97,7 @@ function image_output($tf_data, $fc_data,  $keyword, $number, $number2){
     if($_POST['term']=='less'){//以下
         foreach($tf_data[$keyword] as $key => $val ) {
             for($i = $number; $i > 0; $i--){
-                if (@$i == @$fc_data[$key] && @$i<>null){
+                if (@$i == @$fc_data[$key]){
                     print_photo($key, $val, $fc_data[$key]);
                     $result_num++;
                 }
@@ -107,7 +107,7 @@ function image_output($tf_data, $fc_data,  $keyword, $number, $number2){
     if($_POST['term']=='from_to'){//から・まで
         foreach($tf_data[$keyword] as $key => $val ) {
             for($i = $number; $i <= $number2; $i++){
-                if (@$i == @$fc_data[$key] && @$i<>null){
+                if (@$i == @$fc_data[$key]){
                     print_photo($key, $val, $fc_data[$key]);
                     $result_num++;
                 }
