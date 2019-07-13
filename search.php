@@ -32,18 +32,21 @@ function search_result($tf_data, $fc_data){
         message_print('photo_is_none');
         return 0;
     }
-
+    arsort($tf_data[@$keyword]);
+    $tf_keys = array_keys($tf_data);
+    $pattern = "/".$keyword."/";
+    $target_keys = preg_grep($pattern, $tf_keys);
     if($_POST['term']=='only'){
-        arsort($tf_data[@$keyword]);
-        foreach($tf_data[@$keyword] as $key => $val ) {
-            if (@$number == @$fc_data[$key] && @$number<>null){
-                print_photo($key, $val, $fc_data[$key]);
-                $result_num++;
+        foreach ($target_keys as $target_key){
+            foreach ($tf_data[$target_key] as $key => $val) {
+                if (@$number == @$fc_data[$key] && @$number <> null) {
+                    print_photo($key, $val, $fc_data[$key]);
+                    $result_num++;
+                }
             }
         }
     }
     if($_POST['term']=='more'){//以上
-        arsort($tf_data[@$_POST['keyword']]);
         foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
             for($i = $_POST['number'];$i <= 50;$i++){
                 if (@$i == @$fc_data[$key] && @$i<>null){
@@ -54,7 +57,6 @@ function search_result($tf_data, $fc_data){
         }
     }
     if($_POST['term']=='less'){//以下
-        arsort($tf_data[@$_POST['keyword']]);
         foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
             for($i = $_POST['number'];$i > 0;$i--){
                 if (@$i == @$fc_data[$key] && @$i<>null){
@@ -65,7 +67,6 @@ function search_result($tf_data, $fc_data){
         }
     }
     if($_POST['term']=='from_to'){//から・まで
-        arsort($tf_data[@$_POST['keyword']]);
         foreach($tf_data[@$_POST['keyword']] as $key => $val ) {
             for($i = $number;$i <= $number2;$i++){
                 if (@$i == @$fc_data[$key] && @$i<>null){
