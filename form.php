@@ -14,7 +14,7 @@ foreach($option_data as $option_data_key =>  $option_data_value){
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
     <label>検索キーワード：<input type="text" name="keyword" size=20/></label>
-    <label><input type="radio" name="match_flag" value="complete">完全一致</label>
+    <label><input type="radio" name="match_flag" value="complete" checked>完全一致</label>
     <label><input type="radio" name="match_flag" value="partial">部分一致</label>
     <br>
     <label>条件を選択：<input type="text" name="number" size=5/></label>
