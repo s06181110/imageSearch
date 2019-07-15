@@ -23,7 +23,7 @@ class ProenDB{
     }
 
     public function insertKeyword(){
-        $stmt = $this->db->prepare("INSERT INTO search_count (keyword, scount) VALUES (:keyword, 1)");
+        $stmt = $this->db->prepare("INSERT INTO search_count (keyword) VALUES (:keyword)");
         $this->execute($stmt);
     }
 
