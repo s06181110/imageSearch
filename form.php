@@ -35,7 +35,7 @@ foreach($option_data as $option_data_key =>  $option_data_value){
         })
     </script>
 
-    <input type="submit" value="Search!" />
+    <input type="submit" name="send" value="Search!" />
 </form>
 
 

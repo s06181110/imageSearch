@@ -1,4 +1,5 @@
 <?php
+require 'ProenDB.php';
 
 function search_result($tf_data, $fc_data){
     if(!isset($_POST["keyword"]) || @$_POST["keyword"] === ""){ message_print('keyword_error'); return 0; }
@@ -7,6 +8,12 @@ function search_result($tf_data, $fc_data){
     $number = $_POST["number"];
     $number2 = isset($_POST["number2"]) ? $_POST["number2"] : "";
     $match_type = $_POST["match_type"];
+    $db = new ProenDB($keyword);
+    if($db->getByKeyword()){
+        $db->updateKeyCount();
+    }else{
+        $db->insertKeyword();
+    }
 
     if(array_key_exists($keyword, $tf_data)){
         if (is_invalid_number($_POST['number'])) {
