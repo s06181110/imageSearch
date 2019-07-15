@@ -3,7 +3,6 @@ require 'ProenDB.php';
 
 function search_result($tf_data, $fc_data){
     if(!isset($_POST["keyword"]) || @$_POST["keyword"] === ""){ message_print('keyword_error'); return 0; }
-//    if(!isset($_POST["number"])  || @$_POST["number"] === "") { message_print('number_error'); return 0;}
     $keyword = $_POST["keyword"];
     $number  = isset($_POST["number"])  ? mb_convert_kana($_POST["number"], "n", "utf-8") : "";
     $number2 = isset($_POST["number2"]) ? mb_convert_kana($_POST["number2"], "n", "utf-8") : "";
@@ -142,7 +141,8 @@ function print_photo($key, $val, $data){
     echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
     echo "<ul>\n";
     echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
-    echo "<li class=\"title_area\">"."人数:".$data."人</li>\n";
+    if ($data != null) echo "<li class=\"title_area\">"."人数:".$data."人</li>\n";
+    else echo "<li class=\"title_area\">人数不明</li>\n";
     echo "</ul>\n";
     echo "</div>\n";
 }
