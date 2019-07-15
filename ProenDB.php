@@ -16,7 +16,7 @@ class ProenDB{
 
     public function getByKeyword(){
         $stmt = $this->db->prepare("SELECT keyword FROM search_count WHERE keyword = :keyword");
-        $this->execute($stmt);
+        $this->executeWithKeyword($stmt);
 
         $result = $stmt->fetch();
         return $result['keyword'];
@@ -24,15 +24,15 @@ class ProenDB{
 
     public function insertKeyword(){
         $stmt = $this->db->prepare("INSERT INTO search_count (keyword) VALUES (:keyword)");
-        $this->execute($stmt);
+        $this->executeWithKeyword($stmt);
     }
 
     public function updateKeyCount(){
         $stmt = $this->db->prepare("UPDATE search_count SET scount = scount+1, updated_at = now() WHERE keyword = :keyword");
-        $this->execute($stmt);
+        $this->executeWithKeyword($stmt);
     }
 
-    private function execute($stmt){
+    private function executeWithKeyword($stmt){
         $stmt->bindParam(':keyword', $this->keyword, PDO::PARAM_STR);
         $stmt->execute();
     }
