@@ -1,9 +1,11 @@
 <?php
-$option_data = ['only'=>'のみ',
-                'more'=>'以上',
-                'less'=>'以下',
-                'from_to'=>'から'
-                ];
+$option_data = [
+    'none'=>"指定しない",
+    'only'=>'のみ',
+    'more'=>'以上',
+    'less'=>'以下',
+    'from_to'=>'から'
+];
 
 foreach($option_data as $option_data_key =>  $option_data_value){
     $option_data .= "<option value='".$option_data_key;
@@ -17,15 +19,18 @@ foreach($option_data as $option_data_key =>  $option_data_value){
     <label><input type="radio" name="match_type" value="complete" checked>完全一致</label>
     <label><input type="radio" name="match_type" value="partial">部分一致</label>
     <br>
-    <label>条件を選択：<input type="text" name="number" size=5/></label>
-    <select name="term" id="term">
-        <?php echo $option_data; ?>
-    </select>
+    <label>人数：<select name="term" id="term"><?php echo $option_data; ?></select></label>
 
     <script>
         $(function () {
             $('#term').change(function () {
                 const val = $(this).val();
+                if (val === "none") {
+                    $('#from').remove();
+                } else {
+                    $('#from').remove();
+                    $('#term').before('<label><input type="text" name="number" id="from" size=5 /></label>');
+                }
                 if (val === "from_to") {
                     $('#term').after('<label><input type="text" name="number2" size="5" id="second_input" /></label>');
                 } else {
@@ -37,7 +42,3 @@ foreach($option_data as $option_data_key =>  $option_data_value){
 
     <input type="submit" name="send" value="Search!" />
 </form>
-
-
-
-<?php $_POST["number"] = mb_convert_kana($_POST["number"], "n", "utf-8"); ?>
