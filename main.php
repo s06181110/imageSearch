@@ -7,14 +7,14 @@
 </head>
 <body>
 <?php
-require 'ProenDB.php';
+//require 'ProenDB.php';
 require 'form.php'
 ?>
 
 <?php
-$db = new ProenDB();
-$db->showHotWord();
-?>
+//$db = new ProenDB();
+//$db->showHotWord();
+//?>
 
 <?php
 require 'read.php';

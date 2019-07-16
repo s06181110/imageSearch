@@ -48,12 +48,12 @@ function search_result($tf_data, $fc_data){
         }
     }
 
-    $db = new ProenDB($keyword);
-    if($db->getByKeyword()){
-        $db->updateKeyCount();
-    }else{
-        $db->insertKeyword();
-    }
+//    $db = new ProenDB($keyword);
+//    if($db->getByKeyword()){
+//        $db->updateKeyCount();
+//    }else{
+//        $db->insertKeyword();
+//    }
 
     arsort($tf_data[@$keyword]);
     $result_num = 0;
