@@ -1,7 +1,8 @@
 body,a{
   background-color: #FFBBFF;
   text-align: center;
-  color: #FF6347;
+  color: black;
+  /*color: #FF6347;*/
   text-shadow: 0 0 15px #C71585;
   font-family:"Noto Sans JP";
 }

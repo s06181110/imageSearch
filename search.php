@@ -1,6 +1,10 @@
 <?php
 
 function search_result($tf_data, $fc_data){
+    $keyword = null;
+    $number = null;
+    $number2 = null;
+    $match_type = null;
     if(isset($_GET["keyword"])) {
         $keyword = $_GET["keyword"];
         $_POST['term'] = "none";
@@ -77,7 +81,7 @@ function is_invalid_number($number){
 
 function message_print($key, $keyword = null){
     // $messageを見やすくするための変数
-    $keyword_template = "キーワード「".$keyword."」　人数「".$keyword."人」";
+    $keyword_template = "キーワード「".$keyword."」　人数「".$_POST["number"]."人」";
     //　キーによって返すメッセージを変更する
     $message = [
         'keyword_error'=>'<div class="font_size">検索キーワードを入力して下さい。</div>',
