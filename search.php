@@ -1,12 +1,19 @@
 <?php
-require 'ProenDB.php';
 
 function search_result($tf_data, $fc_data){
-    if(!isset($_POST["keyword"]) || @$_POST["keyword"] === ""){ message_print('keyword_error'); return 0; }
-    $keyword = $_POST["keyword"];
-    $number  = isset($_POST["number"])  ? mb_convert_kana($_POST["number"], "n", "utf-8") : "";
-    $number2 = isset($_POST["number2"]) ? mb_convert_kana($_POST["number2"], "n", "utf-8") : "";
-    $match_type = $_POST["match_type"];
+    if(isset($_GET["keyword"])) {
+        $keyword = $_GET["keyword"];
+        $_POST['term'] = "none";
+        $match_type = "complete";
+    } elseif(!isset($_POST["keyword"]) || @$_POST["keyword"] === "" ){
+        message_print('keyword_error'); return 0;
+    }
+    else{
+        $keyword = $_POST["keyword"];
+        $number = isset($_POST["number"]) ? mb_convert_kana($_POST["number"], "n", "utf-8") : "";
+        $number2 = isset($_POST["number2"]) ? mb_convert_kana($_POST["number2"], "n", "utf-8") : "";
+        $match_type = $_POST["match_type"];
+    }
 
     if(!array_key_exists($keyword, $tf_data)){
         message_print('photo_is_none');
@@ -84,7 +91,6 @@ function message_print($key){
     ];
 
     echo $message[$key];
-    echo "<hr><br>\n";
 }
 
 function image_output($tf_data, $fc_data,  $keyword, $number, $number2){

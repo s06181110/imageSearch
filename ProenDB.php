@@ -36,4 +36,24 @@ class ProenDB{
         $stmt->bindParam(':keyword', $this->keyword, PDO::PARAM_STR);
         $stmt->execute();
     }
+
+    public function showHotWord(){
+        $stmt = $this->db->prepare("SELECT keyword FROM search_count ORDER BY scount LIMIT 0, 5;");
+        $stmt->execute();
+        echo '<div class="hot_word"><p>人気ワード：</p>';
+        echo '<ul>';
+        $items = array();
+        foreach ($stmt as $item){
+            echo $items['keyword'];
+            array_push($items, $item['keyword']);
+        }
+        $items = array_reverse($items);
+        foreach ($items as $key){
+            $href = "?keyword=".$key;
+            echo '<a href="'.$href.'"><li>'.$key.'</li></a></a>';
+        }
+        echo '</ul></div>';
+    }
 }
+?>
+

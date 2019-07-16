@@ -12,10 +12,17 @@ foreach($option_data as $option_data_key =>  $option_data_value){
     $option_data .= "'>".$option_data_value."</option>";
 }
 
+$key = $_GET['keyword'];
+if( !empty($_POST['keyword']) ){ $key = $_POST['keyword']; }
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-    <label>検索キーワード：<input type="text" name="keyword" size=20/></label>
+
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="search_form" id="search_form">
+    <label>検索キーワード：
+        <input type="text" name="keyword" size=20 id="keyword"
+               value="<?php echo $key; ?>"
+        />
+    </label>
     <label><input type="radio" name="match_type" value="complete" checked>完全一致</label>
     <label><input type="radio" name="match_type" value="partial">部分一致</label>
     <br>
@@ -40,5 +47,6 @@ foreach($option_data as $option_data_key =>  $option_data_value){
         })
     </script>
 
-    <input type="submit" name="send" value="Search!" />
-</form>
+    <input id="btn" type="submit" name="send" value="Search!" />
+</form><br><hr>
+
