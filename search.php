@@ -6,9 +6,9 @@ function search_result($tf_data, $fc_data){
         $_POST['term'] = "none";
         $match_type = "complete";
     } elseif(!isset($_POST["keyword"]) || @$_POST["keyword"] === "" ){
-        message_print('keyword_error'); return 0;
-    }
-    else{
+        message_print('keyword_error');
+        return 0;
+    } else {
         $keyword = $_POST["keyword"];
         $number = isset($_POST["number"]) ? mb_convert_kana($_POST["number"], "n", "utf-8") : "";
         $number2 = isset($_POST["number2"]) ? mb_convert_kana($_POST["number2"], "n", "utf-8") : "";
@@ -26,20 +26,20 @@ function search_result($tf_data, $fc_data){
     } else { //　OK
         switch ($_POST['term']){
             case 'none':
-                message_print('none');
+                message_print('none', $keyword);
                 break;
             case 'only':
-                message_print('only');
+                message_print('only', $keyword);
                 break;
             case 'more':
-                message_print('more');
+                message_print('more', $keyword);
                 break;
             case 'less':
-                message_print('more');
+                message_print('more', $keyword);
                 break;
             case 'from_to':
                 if (is_invalid_number($number2)) message_print('number_error');
-                else message_print('from_to');
+                else message_print('from_to', $keyword);
                 break;
         }
     }
@@ -75,15 +75,15 @@ function is_invalid_number($number){
     return $invalid;
 }
 
-function message_print($key){
+function message_print($key, $keyword = null){
     // $messageを見やすくするための変数
-    $keyword_template = "キーワード「".$_POST['keyword']."」　人数「".$_POST['number']."人」";
+    $keyword_template = "キーワード「".$keyword."」　人数「".$keyword."人」";
     //　キーによって返すメッセージを変更する
     $message = [
         'keyword_error'=>'<div class="font_size">検索キーワードを入力して下さい。</div>',
         'number_error'=>'<div class="font_size">人数を正しく入力して下さい。</div>',
         'photo_is_none'=>'<div class="font_size">検索キーワードに合致する写真はありません。</div>',
-        'none'=>'<div class="font_size">キーワード「'.$_POST['keyword'].'」での検索結果<br></div>',
+        'none'=>'<div class="font_size">キーワード「'.$keyword.'」での検索結果<br></div>',
         'only'=>'<div class="font_size">'.$keyword_template.'での検索結果<br></div>',
         'more'=>'<div class="font_size">'.$keyword_template.'以上の検索結果<br></div>',
         'less'=>'<div class="font_size">'.$keyword_template.'以下の検索結果<br></div>',
