@@ -3,10 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>集合写真検索システム</title>
-    <link rel ="stylesheet" href = "style.css">
+    <link rel ="stylesheet" href="style.css">
 </head>
 <body>
-<?php require 'form.php'?>
+<?php
+//require 'ProenDB.php';
+require 'form.php'
+?>
+
+<?php
+//$db = new ProenDB();
+//$db->showHotWord();
+//?>
 
 <?php
 require 'read.php';
@@ -24,3 +32,4 @@ echo "</div>";
 ?>
 </body>
 </html>
+
