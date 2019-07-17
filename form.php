@@ -15,8 +15,7 @@ foreach($option_data as $option_data_key =>  $option_data_value){
 $key = $_GET['keyword'];
 if( !empty($_POST['keyword']) ){ $key = $_POST['keyword']; }
 ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+<div style="padding-top: 90px"></div>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="search_form" id="search_form">
     <label>検索キーワード：
         <input type="text" name="keyword" size=20 id="keyword"

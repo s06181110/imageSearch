@@ -6,26 +6,91 @@
     <script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
 </head>
 
+<header>
+    <a class="link" href="toppage.php"><h1>人物写真検索システム</h1></a>
+</header>
 <body>
-    <header class="site-header">
-        <h1>人物写真検索システム</h1>
-        <ul>
-            <a href="main.php" class="link"><h2>>>サイトへ<h2></a>
-        </ul>
-    </header>
-    <div class="parallax-bg img-bg-01">概要</div>
-    <div class="scrollbox2">
-        複数の画像の中から、キーワードと人数を指定して検索すると、条件に一致した画像の一覧が表示されます。
+    <a class="link" href="main.php">
+        <div class="parallax-bg img-bg-01 scrollme">
+            <div class="goto_site animateme"
+                 data-when="exit"
+                 data-easing="easein"
+                 data-from="0"
+                 data-to="0.2"
+                 data-opacity="0"
+            >
+                Let's Search!
+            </div>
+        </div>
+    </a>
+    <div class="scrollbox2" style="color: #fff;">
+        <p>複数の画像の中から、キーワードと人数を指定して検索すると、条件に一致した画像の一覧が表示されます。</p>
     </div>
     <div class="parallax-bg img-bg-02">G7 メンバー</div>
-        <div class="scrollbox3 scrollme animateme"
-        data-translatey="400"
-        data-translatex="400"
-        data-to="0.15"
-        data-from="0.65">
-            <br>上田 晃<br><br>榎本 啓希<br><br>巴 陽喜<br><br>古本 涼<br><br>松浦 康大<br><br>
-        </div>
-        <a href="main.php" class="link"><h2>>>サイトへ<h2></a>
+    <ul >
+        <li class="scrollme scrollbox3" >
+            <div class="animateme"
+                 data-when="span"
+                 data-easing="easein"
+                 data-opacity="0"
+                 data-translatex=" 1000"
+                 data-from="1"
+                 data-to="0"
+                 style="background-color: #766;"
+            >上田 晃</div>
+        </li>
+        <li class="scrollme scrollbox3">
+            <div class="animateme"
+                 data-when="span"
+                 data-easing="easein"
+                 data-opacity="0"
+                 data-translatex="-1000"
+                 data-from="1"
+                 data-to="0"
+                 style="background-color: #676;"
+            >榎本 啓希</div>
+        </li>
+        <li class="scrollme scrollbox3">
+            <div class="animateme"
+                 data-when="span"
+                 data-easing="easein"
+                 data-opacity="0"
+                 data-translatex="1000"
+                 data-from="1"
+                 data-to="0"
+                 style="background-color: #77556a;"
+            >巴 陽喜</div>
+        </li>
+        <li class="scrollme scrollbox3">
+            <div class="animateme"
+                 data-when="span"
+                 data-easing="easein"
+                 data-opacity="0"
+                 data-translatex="-1000"
+                 data-from="1"
+                 data-to="0"
+                 style="background-color: #777765;"
+            >古本 涼</div>
+        </li>
+        <li class="scrollme scrollbox3">
+            <div class="animateme"
+                 data-when="span"
+                 data-easing="easein"
+                 data-opacity="0"
+                 data-translatex="1000"
+                 data-from="1"
+                 data-to="0"
+                 style="background-color: #5d5f77;"
+            >松浦 康大</div>
+        </li>
+    </ul>
+
+
+
     <script src='js/jquery.scrollme.js'></script>
 </body>
+<footer>
+    <p>Copyright 2019 by G007</p>
+</footer>
 </html>
+

@@ -6,6 +6,10 @@
     <link rel ="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
+
+<header>
+    <a class="link" href="toppage.php"><h1>人物写真検索システム</h1></a>
+</header>
 <body>
 <?php
 //require 'ProenDB.php';
@@ -35,6 +39,8 @@ echo "</div>";
 <script>
 $(window).fadeThis();
 </script>
-<a href="toppage.php" class="link">>>トップへ</a>
 </body>
+<footer>
+    <p>Copyright 2019 by G007</p>
+</footer>
 </html>

@@ -1,15 +1,13 @@
-body{
-  text-align: center;
-  background: #222222;
-  }
-
-.site-header{
-    background: #222222;
+header{
+    background-color: #344063;
     color: #DDDDDD;
     display: flex;
     position: fixed;
-    justify-content: space-around;
     width: 100%;
+}
+
+header h1{
+    margin-left: 10%;
 }
 
   /*画面全体の設定*/
@@ -19,6 +17,15 @@ html {
   margin: 0 auto;
   letter-spacing: 2px;
   font-size: 10px;
+}
+
+body{
+    background-color: #344063;
+}
+
+ul{
+    margin: 0; !important;
+    padding: 0; !important;
 }
 
 /*固定する背景*/
@@ -32,31 +39,54 @@ div {
   height: 100%;
   padding: 5%;
 }
+
+.goto_site{
+    width: 50vw;
+    height: 20vh;
+    background-color: #a4c4f4;
+}
+
 .parallax-bg {
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 50%;
+  height: 20%;
 }
 /*各背景の画像*/
 .img-bg-01 {
-    height: 40%;
-  background-image: url('images/a.jpeg');
+    height: 100%;
+    background-image: url('images/a.jpeg');
 }
 .img-bg-02 {
-    height: 40%;
-  background-image: url('images/a.jpeg');
+    height: 25%;
+    background-image: url('images/a.jpeg');
 }
 /*スクロールするコンテンツ*/
 .scrollbox2 {
     height: 70%;
-  background-color: #666;
+    background-color: #666;
 }
 .scrollbox3 {
-  background-color: #666;
+    height: 10%;
+    width: 100%;
 }
 
+.scrollbox3 div{
+    padding: 10px;!important;
+}
+
+footer{
+    font-family: SansSerif;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    padding: 30px 0;
+}
+
+
 .link {
-    color: #DDDDDD;
+    width: 20%;
+    text-decoration: none;
+    color: #fff;
 }
