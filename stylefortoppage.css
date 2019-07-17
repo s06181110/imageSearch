@@ -1,0 +1,62 @@
+body{
+  text-align: center;
+  background: #222222;
+  }
+
+.site-header{
+    background: #222222;
+    color: #DDDDDD;
+    display: flex;
+    position: fixed;
+    justify-content: space-around;
+    width: 100%;
+}
+
+  /*画面全体の設定*/
+body,
+html {
+  height: 100%;
+  margin: 0 auto;
+  letter-spacing: 2px;
+  font-size: 10px;
+}
+
+/*固定する背景*/
+div {
+  box-sizing: border-box;
+  color: #000000;
+  font-size: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 5%;
+}
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 50%;
+}
+/*各背景の画像*/
+.img-bg-01 {
+    height: 40%;
+  background-image: url('images/a.jpeg');
+}
+.img-bg-02 {
+    height: 40%;
+  background-image: url('images/a.jpeg');
+}
+/*スクロールするコンテンツ*/
+.scrollbox2 {
+    height: 70%;
+  background-color: #666;
+}
+.scrollbox3 {
+  background-color: #666;
+}
+
+.link {
+    color: #DDDDDD;
+}
