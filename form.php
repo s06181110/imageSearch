@@ -48,5 +48,5 @@ if( !empty($_POST['keyword']) ){ $key = $_POST['keyword']; }
     </script>
 
     <input id="btn" type="submit" name="send" value="Search!" />
-</form><br><hr>
+</form>
 
