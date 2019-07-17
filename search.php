@@ -147,12 +147,13 @@ function image_output($tf_data, $fc_data,  $keyword, $number, $number2){
 }
 
 function print_photo($key, $val, $data){
-    echo "<div class=\"p_box\">\n";
+    echo '<div class="p_box slide-bottom" data-plugin-options=\'{"reverse":false}\'';
     echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
     echo "<ul>\n";
     echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
     if ($data != null) echo "<li class=\"title_area\">"."人数:".$data."人</li>\n";
     else echo "<li class=\"title_area\">人数不明</li>\n";
     echo "</ul>\n";
-    echo "</div>\n";
+    echo "</div></div>\n";
 }
+
