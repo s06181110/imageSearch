@@ -30,10 +30,7 @@ $fc_data = fc_read();
 <?php
 require 'search.php';
 $result_num = search_result($tf_data, $fc_data);
-echo "<br>";
-echo '<div class="font_size slide-bottom">';
-echo "検索結果は".$result_num."件でした。";
-echo "</div>";
+echo '<br><div class="font_size slide-bottom">検索結果は'.$result_num.'件でした。</div>';
 ?>
 <script src="./jquery-fadethis-master/dist/jquery.fadethis.min.js"></script>
 <script>

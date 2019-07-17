@@ -1,7 +1,7 @@
 <?php
 
 function search_result($tf_data, $fc_data){
-    $keyword = null;
+    $keywords = null;
     $number = null;
     $number2 = null;
     $match_type = null;
@@ -13,39 +13,20 @@ function search_result($tf_data, $fc_data){
         message_print('keyword_error');
         return 0;
     } else {
-        $keyword = $_POST["keyword"];
+        $tempkey = mb_convert_kana($_POST["keyword"], 's', 'utf-8');
+        $keywords = preg_split('/[\s]+/', $tempkey, -1, PREG_SPLIT_NO_EMPTY);
         $number = isset($_POST["number"]) ? mb_convert_kana($_POST["number"], "n", "utf-8") : "";
         $number2 = isset($_POST["number2"]) ? mb_convert_kana($_POST["number2"], "n", "utf-8") : "";
         $match_type = $_POST["match_type"];
     }
 
-    if(!array_key_exists($keyword, $tf_data)){
-        message_print('photo_is_none');
-        return 0;
-    }
+
+
+
 
     if (is_invalid_number($number) && isset($_POST["number"])) { // 送信されているのに有効でない
         message_print('number_error');
         return 0;
-    } else { //　OK
-        switch ($_POST['term']){
-            case 'none':
-                message_print('none', $keyword);
-                break;
-            case 'only':
-                message_print('only', $keyword);
-                break;
-            case 'more':
-                message_print('more', $keyword);
-                break;
-            case 'less':
-                message_print('more', $keyword);
-                break;
-            case 'from_to':
-                if (is_invalid_number($number2)) message_print('number_error');
-                else message_print('from_to', $keyword);
-                break;
-        }
     }
 
 //    $db = new ProenDB($keyword);
@@ -54,20 +35,26 @@ function search_result($tf_data, $fc_data){
 //    }else{
 //        $db->insertKeyword();
 //    }
-
-    arsort($tf_data[@$keyword]);
     $result_num = 0;
-    if($match_type == "complete"){      //完全一致
-        $result_num = image_output($tf_data, $fc_data, $keyword, $number, $number2);
-    }else if($match_type == "partial"){ //部分一致
-        $tf_keys = array_keys($tf_data);
-        $pattern = "/".$keyword."/";
-        $target_keys = preg_grep($pattern, $tf_keys);
-        foreach ($target_keys as $target_key){
-            $result_num = image_output($tf_data, $fc_data, $target_key, $number, $number2);
+    foreach ($keywords as $keyword){
+        $keyword_exists = array_key_exists($keyword, $tf_data);
+        term_output($keyword, $number2);
+        if(!$keyword_exists) {
+            message_print('photo_is_none');
+        }else {
+            arsort($tf_data[@$keyword]);
+        }
+        if($match_type == "complete" && $keyword_exists){      //完全一致
+            $result_num += image_output($tf_data, $fc_data, $keyword, $number, $number2);
+        }else if($match_type == "partial"){ //部分一致
+            $tf_keys = array_keys($tf_data);
+            $pattern = "/".$keyword."/";
+            $target_keys = preg_grep($pattern, $tf_keys);
+            foreach ($target_keys as $target_key){
+                $result_num += image_output($tf_data, $fc_data, $target_key, $number, $number2);
+            }
         }
     }
-
     return $result_num;
 }
 
@@ -95,6 +82,28 @@ function message_print($key, $keyword = null){
     ];
 
     echo $message[$key];
+}
+
+function term_output($keyword, $number2){
+    echo '<br><hr>';
+    switch ($_POST['term']){
+        case 'none':
+            message_print('none', $keyword);
+            break;
+        case 'only':
+            message_print('only', $keyword);
+            break;
+        case 'more':
+            message_print('more', $keyword);
+            break;
+        case 'less':
+            message_print('more', $keyword);
+            break;
+        case 'from_to':
+            if (is_invalid_number($number2)) message_print('number_error');
+            else message_print('from_to', $keyword);
+            break;
+    }
 }
 
 function image_output($tf_data, $fc_data,  $keyword, $number, $number2){
