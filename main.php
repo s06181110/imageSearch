@@ -30,42 +30,42 @@ echo '<br><div class="font_size slide-bottom">検索結果は'.$result_num.'件�
 
 <script src="./jquery-fadethis-master/dist/jquery.fadethis.min.js"></script>
 <script>
-$(window).fadeThis();
+    $(window).fadeThis();
 
-$(function(){
-    $('.js-modal-open').each(function(){
-        $(this).on('click',function(){
-            var target = $(this).data('target');
-            var modal = document.getElementById(target);
-            $(modal).fadeIn();
+    $(function(){
+        $('.js-modal-open').each(function(){
+            $(this).on('click',function(){
+                var target = $(this).data('target');
+                var modal = document.getElementById(target);
+                $(modal).fadeIn();
+                return false;
+            });
+        });
+        $('.js-modal-close').on('click',function(){
+            $('.js-modal').fadeOut();
             return false;
         });
     });
-    $('.js-modal-close').on('click',function(){
-        $('.js-modal').fadeOut();
-        return false;
-    });
-});
 
-$(function(){
-    var topBtn=$('#pageTop');
-    topBtn.hide();
-    $(window).scroll(function(){
-        if($(this).scrollTop()>80){
-            topBtn.fadeIn();
-        }else{
-            topBtn.fadeOut();
-        }
-    });
-    topBtn.click(function(){
-        $('body,html').animate({
-            scrollTop: 0},500);
-        return false;
+    $(function(){
+        var topBtn=$('#pageTop');
+        topBtn.hide();
+        $(window).scroll(function(){
+            if($(this).scrollTop()>80){
+                topBtn.fadeIn();
+            }else{
+                topBtn.fadeOut();
+            }
+        });
+        topBtn.click(function(){
+            $('body,html').animate({
+                scrollTop: 0},500);
+            return false;
+
+        });
+
 
     });
-
-
-});
 
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

@@ -84,36 +84,36 @@ form{
 }
 
 .p_box{
-margin-left: 10px;
-margin-right: 10px;
-display: inline-block;
-width: 200px;
-height: 200px;
-border: 1px solid #777;
-position: relative;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #777;
+  position: relative;
 }
 .p_box li{
   list-style: none;
-position: absolute;
-background:rgba(10,10,10,0.80);
-color: #fff;
-padding: 10px ;
+  position: absolute;
+  background:rgba(10,10,10,0.80);
+  color: #fff;
+  padding: 10px ;
 }
 .p_box .tag_area{
-font-size:12px;
-top: 0px;
-left: 0;
+  font-size:12px;
+  top: 0px;
+  left: 0;
 }
 .p_box .title_area{
-width: calc(100% – 20px);
-font-size:12px;
-bottom: 0;
-left: 0;
+  width: calc(100% – 20px);
+  font-size:12px;
+  bottom: 0;
+  left: 0;
 }
 .p_box img{
-object-fit:contain;
-height:100%;
-width: 100%;
+  object-fit:contain;
+  height:100%;
+  width: 100%;
 }
 
 
