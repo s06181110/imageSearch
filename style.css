@@ -11,6 +11,18 @@ header h1{
   margin-left: 10%;
 }
 
+.nav{
+  position: fixed;
+  right: 10px;
+  bottom: 100px;
+  width: 80px;
+  height: 50px;
+  line-height: 50px;
+  background-color: #370e98;
+  z-index: 10;
+  color: #fff;
+}
+
 body, html {
   height: 100%;
   margin: 0 auto;
