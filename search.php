@@ -110,7 +110,7 @@ function image_output($tf_data, $fc_data,  $keyword, $number, $number2){
     $result_num = 0;
     if($_POST['term']=='none') {
         foreach ($tf_data[$keyword] as $key => $val) {
-            print_photo($key, $val, $fc_data[$key]);
+            print_photo($key, $val, $fc_data[$key], $result_num);
             $result_num++;
         }
     }
@@ -155,14 +155,33 @@ function image_output($tf_data, $fc_data,  $keyword, $number, $number2){
     return $result_num;
 }
 
-function print_photo($key, $val, $data){
-    echo '<div class="p_box slide-bottom" data-plugin-options=\'{"reverse":false}\'';
-    echo "<a href='$key'><img src='$key' alt=''></a><br>\n";
-    echo "<ul>\n";
-    echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
-    if ($data != null) echo "<li class=\"title_area\">"."人数:".$data."人</li>\n";
-    else echo "<li class=\"title_area\">人数不明</li>\n";
-    echo "</ul>\n";
-    echo "</div></div>\n";
+function print_photo($src, $val, $data, $num){
+    echo '<div class="content slide-bottom" data-plugin-options=\'{"reverse":false}\'>
+            <a class="js-modal-open" href="" data-target="modal'.$num.'">
+            <div class="p_box">
+                <img src="'.$src.'" alt=""><br>
+                <ul><li class="tag_area">キーワード:'.$val.'回</li>';
+    if ($data != null) echo '<li class="title_area">人数:'.$data.'人</li>';
+    else echo '<li class="title_area">人数不明</li>';
+    echo '</ul></div></a></div>';
+    echo_modal($src, $num);
+
+//    echo '<div class="p_box slide-bottom" data-plugin-options=\'{"reverse":false}\'';
+//    echo "<img src='$key' alt=''><br>\n";
+//    echo "<ul>\n";
+//    echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
+//    if ($data != null) echo "<li class=\"title_area\">"."人数:".$data."人</li>\n";
+//    else echo "<li class=\"title_area\">人数不明</li>\n";
+//    echo "</ul>\n";
+//    echo "</div></div></label>>\n";
+}
+
+function echo_modal($src, $num){
+    echo '<div id="modal'.$num.'" class="modal js-modal">
+            <div class="modal__bg js-modal-close"></div>
+            <div class="modal__content">
+                <img style="width: 100%;" class="modal-content" src="'.$src.'" alt="">
+            </div>
+          </div>';
 }
 
