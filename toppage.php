@@ -8,7 +8,7 @@
 
 <body>
 <header style="z-index: 3;">
-    <a class="link" href="toppage.php"><h1>人物写真検索システム</h1></a>
+    <h1><a class="link" href="#">人物写真検索システム</a></h1>
 </header>
 <a class="link" href="main.php">
     <div class="parallax-bg img-bg-01 scrollme">

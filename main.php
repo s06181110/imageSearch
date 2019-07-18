@@ -8,7 +8,7 @@
 </head>
 <body>
 <header>
-    <a class="link" href="toppage.php"><h1>人物写真検索システム</h1></a>
+    <h1><a class="link" href="toppage.php">人物写真検索システム</a></h1>
 </header>
 <a id="pageTop" href="#"><div class="nav">topへ</div></a>
 
