@@ -117,7 +117,7 @@ function image_output($tf_data, $fc_data,  $keyword, $number, $number2){
     if($_POST['term']=='only'){
         foreach($tf_data[$keyword] as $key => $val ) {
             if ($number == @$fc_data[$key]){
-                print_photo($key, $val, $fc_data[$key]);
+                print_photo($key, $val, $fc_data[$key], $result_num);
                 $result_num++;
             }
         }
@@ -126,7 +126,7 @@ function image_output($tf_data, $fc_data,  $keyword, $number, $number2){
         foreach($tf_data[$keyword] as $key => $val ) {
             for($i = $number; $i <= 50; $i++){
                 if (@$i == @$fc_data[$key]){
-                    print_photo($key, $val, $fc_data[$key]);
+                    print_photo($key, $val, $fc_data[$key], $result_num);
                     $result_num++;
                 }
             }
@@ -136,7 +136,7 @@ function image_output($tf_data, $fc_data,  $keyword, $number, $number2){
         foreach($tf_data[$keyword] as $key => $val ) {
             for($i = $number; $i > 0; $i--){
                 if (@$i == @$fc_data[$key]){
-                    print_photo($key, $val, $fc_data[$key]);
+                    print_photo($key, $val, $fc_data[$key], $result_num);
                     $result_num++;
                 }
             }
@@ -146,7 +146,7 @@ function image_output($tf_data, $fc_data,  $keyword, $number, $number2){
         foreach($tf_data[$keyword] as $key => $val ) {
             for($i = $number; $i <= $number2; $i++){
                 if (@$i == @$fc_data[$key]){
-                    print_photo($key, $val, $fc_data[$key]);
+                    print_photo($key, $val, $fc_data[$key], $result_num);
                     $result_num++;
                 }
             }
