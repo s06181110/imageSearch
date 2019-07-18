@@ -5,11 +5,14 @@ class ProenDB{
     private $db;
     private $keyword;
 
-    public function __construct($keyword=null){
+    public function __construct(){
         $dsn = 'mysql:host=localhost;dbname=test;charset=utf8;unix_socket=/tmp/mysql.sock';
         $username = 'proen';
         $password = 'ProjectEnshu';
         $this->db = new PDO($dsn, $username, $password);
+    }
+
+    public function setKeyword($keyword){
         $this->keyword = $keyword;
     }
 
@@ -40,18 +43,20 @@ class ProenDB{
     public function showHotWord(){
         $stmt = $this->db->prepare("SELECT keyword FROM search_count ORDER BY scount LIMIT 0, 8;");
         $stmt->execute();
-        echo '<div class="hot_word"><p>人気ワード：</p>';
         $items = array();
         foreach ($stmt as $item){
             array_push($items, $item['keyword']);
         }
-        $items = array_reverse($items);
-        echo '<ul>';
-        foreach ($items as $key){
-            $href = "?keyword=".$key;
-            echo '<li><a href="'.$href.'">'.$key.'</a></li>';
+        if($items){
+            $items = array_reverse($items);
+            echo '<div class="hot_word"><p>人気ワード：</p>';
+            echo '<ul>';
+            foreach ($items as $key){
+                $href = "?keyword=".$key;
+                echo '<li><a href="'.$href.'">'.$key.'</a></li>';
+            }
+            echo '</ul></div>';
         }
-        echo '</ul></div>';
     }
 }
 ?>

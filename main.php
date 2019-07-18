@@ -16,9 +16,6 @@
 require 'ProenDB.php';
 require 'form.php';
 
-$db = new ProenDB();
-$db->showHotWord();
-
 require 'read.php';
 $tf_data = tf_read();
 $fc_data = fc_read();

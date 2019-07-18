@@ -25,6 +25,22 @@ function search_result($tf_data, $fc_data){
         return 0;
     }
 
+    $tf_keys = array_keys($tf_data);
+    $related_keys = array();
+    foreach ($keywords as $keyword){
+        $pattern = "/".$keyword."/";
+        foreach (preg_grep($pattern, $tf_keys) as $related_key){
+            array_push($related_keys, $related_key);
+        }
+    }
+    $db = new ProenDB();
+    echo '<div class="pop_up">';
+    $db->showHotWord();
+    if($related_keys) related_words($related_keys);
+    echo '</div>';
+
+
+
     $result_num = 0;
     foreach ($keywords as $keyword){
         $keyword_exists = array_key_exists($keyword, $tf_data);
@@ -33,7 +49,7 @@ function search_result($tf_data, $fc_data){
             message_print('photo_is_none');
         }else {
             arsort($tf_data[@$keyword]);
-            $db = new ProenDB($keyword);
+            $db->setKeyword($keyword);
             if($db->getByKeyword()){
                 $db->updateKeyCount();
             }else{
@@ -43,10 +59,9 @@ function search_result($tf_data, $fc_data){
         if($match_type == "complete" && $keyword_exists){      //完全一致
             $result_num += image_output($tf_data, $fc_data, $keyword, $number, $number2);
         }else if($match_type == "partial"){ //部分一致
-            $tf_keys = array_keys($tf_data);
-            $pattern = "/".$keyword."/";
-            $target_keys = preg_grep($pattern, $tf_keys);
-            foreach ($target_keys as $target_key){
+//            $pattern = "/".$keyword."/";
+//            $target_keys = preg_grep($pattern, $tf_keys);
+            foreach ($related_keys as $target_key){
                 $result_num += image_output($tf_data, $fc_data, $target_key, $number, $number2);
             }
         }
@@ -170,5 +185,15 @@ function echo_modal($src, $num){
                 <img style="width: 100%;" class="modal-content" src="'.$src.'" alt="">
             </div>
           </div>';
+}
+
+function related_words($items){
+    echo '<div class="hot_word"><p>関連ワード：</p>';
+    echo '<ul>';
+    foreach ($items as $key){
+        $href = "?keyword=".$key;
+        echo '<li><a href="'.$href.'">'.$key.'</a></li>';
+    }
+    echo '</ul></div>';
 }
 
