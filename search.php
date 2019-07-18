@@ -20,10 +20,6 @@ function search_result($tf_data, $fc_data){
         $match_type = $_POST["match_type"];
     }
 
-
-
-
-
     if (is_invalid_number($number) && isset($_POST["number"])) { // 送信されているのに有効でない
         message_print('number_error');
         return 0;
@@ -165,15 +161,6 @@ function print_photo($src, $val, $data, $num){
     else echo '<li class="title_area">人数不明</li>';
     echo '</ul></div></a></div>';
     echo_modal($src, $num);
-
-//    echo '<div class="p_box slide-bottom" data-plugin-options=\'{"reverse":false}\'';
-//    echo "<img src='$key' alt=''><br>\n";
-//    echo "<ul>\n";
-//    echo "<li class=\"tag_area\">"."キーワード:".$val."回</li>\n";
-//    if ($data != null) echo "<li class=\"title_area\">"."人数:".$data."人</li>\n";
-//    else echo "<li class=\"title_area\">人数不明</li>\n";
-//    echo "</ul>\n";
-//    echo "</div></div></label>>\n";
 }
 
 function echo_modal($src, $num){

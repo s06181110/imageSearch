@@ -46,22 +46,6 @@ footer{
   color: #fff;
 }
 
-/*body,a{*/
-/*  margin: 0;*/
-/*  background-color: #FFBBFF;*/
-/*  text-align: center;*/
-/*  color: black;*/
-/*  !*color: #FF6347;*!*/
-/*  text-shadow: 0 0 15px #C71585;*/
-/*  font-family:"Noto Sans JP";*/
-/*}*/
-/*input,select,textarea{*/
-/*  background-color: #FFDDFF;*/
-/*}*/
-/*p{*/
-/*  margin: 20px auto;*/
-/*  width: 400px;*/
-/*}*/
 body{
   background-color: #cce3e6;
   text-align: center;
