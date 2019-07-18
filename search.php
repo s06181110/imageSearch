@@ -6,7 +6,7 @@ function search_result($tf_data, $fc_data){
     $number2 = null;
     $match_type = null;
     if(isset($_GET["keyword"])) {
-        $keyword = $_GET["keyword"];
+        $keywords = array($_GET["keyword"]);
         $_POST['term'] = "none";
         $match_type = "complete";
     } elseif(!isset($_POST["keyword"]) || @$_POST["keyword"] === "" ){
@@ -25,12 +25,6 @@ function search_result($tf_data, $fc_data){
         return 0;
     }
 
-//    $db = new ProenDB($keyword);
-//    if($db->getByKeyword()){
-//        $db->updateKeyCount();
-//    }else{
-//        $db->insertKeyword();
-//    }
     $result_num = 0;
     foreach ($keywords as $keyword){
         $keyword_exists = array_key_exists($keyword, $tf_data);
@@ -39,6 +33,12 @@ function search_result($tf_data, $fc_data){
             message_print('photo_is_none');
         }else {
             arsort($tf_data[@$keyword]);
+            $db = new ProenDB($keyword);
+            if($db->getByKeyword()){
+                $db->updateKeyCount();
+            }else{
+                $db->insertKeyword();
+            }
         }
         if($match_type == "complete" && $keyword_exists){      //完全一致
             $result_num += image_output($tf_data, $fc_data, $keyword, $number, $number2);

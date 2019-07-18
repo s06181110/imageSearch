@@ -13,11 +13,11 @@
 <a id="pageTop" href="#"><div class="nav">topへ</div></a>
 
 <?php
-//require 'ProenDB.php';
+require 'ProenDB.php';
 require 'form.php';
 
-//$db = new ProenDB();
-//$db->showHotWord();
+$db = new ProenDB();
+$db->showHotWord();
 
 require 'read.php';
 $tf_data = tf_read();
