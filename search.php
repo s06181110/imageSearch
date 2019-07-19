@@ -97,7 +97,7 @@ function term_output($keyword, $number2){
             message_print('more', $keyword);
             break;
         case 'less':
-            message_print('more', $keyword);
+            message_print('less', $keyword);
             break;
         case 'from_to':
             if (is_invalid_number($number2)) message_print('number_error');
@@ -165,4 +165,3 @@ function print_photo($key, $val, $data){
     echo "</ul>\n";
     echo "</div></div>\n";
 }
-
